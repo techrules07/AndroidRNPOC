@@ -1,6 +1,8 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 import com.android.build.gradle.LibraryExtension
 import java.io.File
+import com.android.build.gradle.LibraryExtension
+import java.io.File
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -13,6 +15,11 @@ extra.apply {
     set("compileSdkVersion", 36)
     set("targetSdkVersion", 36)
     set("minSdkVersion", 28)
+    set(
+        "REACT_NATIVE_NODE_MODULES_DIR",
+        File(rootDir, "reactnative/node_modules/react-native").absolutePath
+    )
+    set("reactNativeArchitectures", "armeabi-v7a,x86,x86_64,arm64-v8a")
 }
 
 subprojects {

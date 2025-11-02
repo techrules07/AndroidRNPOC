@@ -6,15 +6,6 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
-// Provide React Native modules with the monorepo node_modules path and ABI list.
-extensions.extraProperties.apply {
-    set(
-        "REACT_NATIVE_NODE_MODULES_DIR",
-        File(rootDir, "reactnative/node_modules").canonicalPath
-    )
-    set("reactNativeArchitectures", "armeabi-v7a,x86,x86_64,arm64-v8a")
-}
-
 android {
     namespace = "com.pft.android.apps.androidrnpoc"
     compileSdk {
