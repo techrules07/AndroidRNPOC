@@ -2,10 +2,10 @@ package com.pft.android.apps.androidrnpoc
 
 import android.app.Application
 import android.content.pm.ApplicationInfo
+import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
-import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
 
 class MainApplication : Application(), ReactApplication {
@@ -16,7 +16,7 @@ class MainApplication : Application(), ReactApplication {
                 applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
 
             override fun getPackages(): List<ReactPackage> =
-                listOf(MainReactPackage())
+                PackageList(this).packages
 
             override fun getJSMainModuleName(): String = "index"
 
