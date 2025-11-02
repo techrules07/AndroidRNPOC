@@ -36,5 +36,9 @@ subprojects {
                 }
             }
         }
+        repositories {
+            google()
+            mavenCentral()
+        }
     }
 }
