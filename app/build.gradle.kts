@@ -66,7 +66,6 @@ dependencies {
     implementation("com.facebook.react:react-android:0.73.5")
     implementation("com.facebook.react:hermes-android:0.73.5")
 
-    debugImplementation("com.facebook.react:hermes-inspector:0.73.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
