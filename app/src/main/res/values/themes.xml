@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.AndroidRNPOC" parent="Theme.Material3.DayNight" />
+    <style name="Theme.AndroidRNPOC" parent="Theme.AppCompat.DayNight.NoActionBar" />
 
     <style name="Theme.AndroidRNPOC.React" parent="Theme.AppCompat.DayNight.NoActionBar" />
 </resources>
