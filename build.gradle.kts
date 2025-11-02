@@ -10,4 +10,31 @@ plugins {
 
 extra.apply {
     set("kotlinVersion", "2.0.21")
+    set("compileSdkVersion", 36)
+    set("targetSdkVersion", 36)
+    set("minSdkVersion", 28)
+}
+
+subprojects {
+    if (name in setOf(
+            "react-native-gesture-handler",
+            "react-native-screens",
+            "react-native-safe-area-context",
+            "react-native-webview"
+        )
+    ) {
+        plugins.withId("com.android.library") {
+            extensions.findByType(LibraryExtension::class.java)?.apply {
+                compileSdk = 36
+                defaultConfig {
+                    minSdk = 28
+                    targetSdk = 36
+                }
+            }
+        }
+        repositories {
+            google()
+            mavenCentral()
+        }
+    }
 }

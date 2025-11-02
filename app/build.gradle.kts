@@ -10,7 +10,7 @@ plugins {
 extensions.extraProperties.apply {
     set(
         "REACT_NATIVE_NODE_MODULES_DIR",
-        File(rootDir, "reactnative/node_modules/react-native").canonicalPath
+        File(rootDir, "reactnative/node_modules").canonicalPath
     )
     set("reactNativeArchitectures", "armeabi-v7a,x86,x86_64,arm64-v8a")
 }
