@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.facebook.react:react-android:0.73.5")
     implementation("com.facebook.react:hermes-android:0.73.5")
 

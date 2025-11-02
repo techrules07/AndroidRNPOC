@@ -19,7 +19,7 @@
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
             android:exported="false"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AndroidRNPOC" />
+            android:theme="@style/Theme.AndroidRNPOC.React" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
