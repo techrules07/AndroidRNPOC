@@ -7,10 +7,13 @@ plugins {
 }
 
 // Provide React Native modules with the monorepo node_modules path and ABI list.
-ext[
-    "REACT_NATIVE_NODE_MODULES_DIR"
-] = File(rootDir, "reactnative/node_modules").canonicalPath
-ext["reactNativeArchitectures"] = "armeabi-v7a,x86,x86_64,arm64-v8a"
+extensions.extraProperties.apply {
+    set(
+        "REACT_NATIVE_NODE_MODULES_DIR",
+        File(rootDir, "reactnative/node_modules/react-native").canonicalPath
+    )
+    set("reactNativeArchitectures", "armeabi-v7a,x86,x86_64,arm64-v8a")
+}
 
 android {
     namespace = "com.pft.android.apps.androidrnpoc"
