@@ -1,18 +1,19 @@
 package com.pft.android.apps.androidrnpoc
 
 import android.app.Application
+import android.content.pm.ApplicationInfo
 import com.facebook.react.ReactApplication
 import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
 import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
-import com.pft.android.apps.androidrnpoc.BuildConfig
 
 class MainApplication : Application(), ReactApplication {
 
-    private val host: ReactNativeHost by lazy(LazyThreadSafetyMode.NONE) {
+    override val reactNativeHost: ReactNativeHost by lazy(LazyThreadSafetyMode.NONE) {
         object : ReactNativeHost(this@MainApplication) {
-            override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
+            override fun getUseDeveloperSupport(): Boolean =
+                applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE != 0
 
             override fun getPackages(): List<ReactPackage> =
                 listOf(MainReactPackage())
@@ -22,8 +23,6 @@ class MainApplication : Application(), ReactApplication {
             override fun getBundleAssetName(): String = "index.android.bundle"
         }
     }
-
-    override fun getReactNativeHost(): ReactNativeHost = host
 
     override fun onCreate() {
         super.onCreate()
