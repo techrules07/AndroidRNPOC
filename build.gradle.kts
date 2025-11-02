@@ -17,7 +17,7 @@ extra.apply {
     set("minSdkVersion", 28)
     set(
         "REACT_NATIVE_NODE_MODULES_DIR",
-        File(rootDir, "reactnative/node_modules/react-native").absolutePath
+        System.getenv("REACT_NATIVE_NODE_MODULES_DIR") ?: File(rootDir, "reactnative/node_modules/react-native").absolutePath
     )
     set("reactNativeArchitectures", "armeabi-v7a,x86,x86_64,arm64-v8a")
 }
