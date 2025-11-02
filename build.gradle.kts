@@ -12,8 +12,11 @@ extra.apply {
     set("compileSdkVersion", 36)
     set("targetSdkVersion", 36)
     set("minSdkVersion", 28)
-    set("REACT_NATIVE_NODE_MODULES_DIR", File(rootDir, "reactnative/node_modules").absolutePath)
-    set("kotlinVersion", libs.versions.kotlin.get())
+    set(
+        "REACT_NATIVE_NODE_MODULES_DIR",
+        File(rootDir, "reactnative/node_modules/react-native").absolutePath
+    )
+    set("kotlinVersion", "2.0.21")
 }
 
 subprojects {
