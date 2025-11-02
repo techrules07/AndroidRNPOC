@@ -6,11 +6,12 @@ import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
 import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
+import com.pft.android.apps.androidrnpoc.BuildConfig
 
 class MainApplication : Application(), ReactApplication {
 
-    private val reactNativeHost: ReactNativeHost by lazy {
-        object : ReactNativeHost(this) {
+    private val host: ReactNativeHost by lazy(LazyThreadSafetyMode.NONE) {
+        object : ReactNativeHost(this@MainApplication) {
             override fun getUseDeveloperSupport(): Boolean = BuildConfig.DEBUG
 
             override fun getPackages(): List<ReactPackage> =
@@ -22,7 +23,7 @@ class MainApplication : Application(), ReactApplication {
         }
     }
 
-    override fun getReactNativeHost(): ReactNativeHost = reactNativeHost
+    override fun getReactNativeHost(): ReactNativeHost = host
 
     override fun onCreate() {
         super.onCreate()
