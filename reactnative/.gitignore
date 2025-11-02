@@ -1,0 +1,9 @@
+node_modules/
+*.log
+android/
+ios/
+.gradle/
+.vscode/
+.idea/
+Pods/
+*.iml

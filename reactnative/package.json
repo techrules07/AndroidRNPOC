@@ -1,0 +1,21 @@
+{
+  "name": "androidrnpoc-hybrid",
+  "version": "0.1.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "react-native start",
+    "android:bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output ../app/src/main/assets/index.android.bundle --assets-dest ../app/src/main/res",
+    "android:bundle:dev": "react-native bundle --platform android --dev true --entry-file index.js --bundle-output ../app/src/main/assets/index.android.bundle --assets-dest ../app/src/main/res"
+  },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-native": "0.73.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.22.10",
+    "@babel/runtime": "^7.22.10",
+    "@react-native/metro-config": "0.73.5",
+    "metro-react-native-babel-preset": "0.73.5"
+  }
+}

@@ -39,6 +39,19 @@ android {
     buildFeatures {
         compose = true
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+        jniLibs {
+            pickFirsts += listOf(
+                "**/libc++_shared.so",
+                "**/libfbjni.so",
+                "**/libturbomodulejsijni.so",
+                "**/libhermes.so"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -50,6 +63,10 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("com.facebook.react:react-android:0.73.5")
+    implementation("com.facebook.react:hermes-android:0.73.5")
+
+    debugImplementation("com.facebook.react:hermes-inspector:0.73.5")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
