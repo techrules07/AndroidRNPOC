@@ -1,5 +1,3 @@
-import java.io.File
-
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -69,10 +67,6 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.facebook.react:react-android:0.73.5")
     implementation("com.facebook.react:hermes-android:0.73.5")
-    implementation(project(":react-native-gesture-handler"))
-    implementation(project(":react-native-screens"))
-    implementation(project(":react-native-safe-area-context"))
-    implementation(project(":react-native-webview"))
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
