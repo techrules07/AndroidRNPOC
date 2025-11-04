@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
@@ -14,11 +14,14 @@ import {loginRequest} from './store/authSlice';
 
 const ACCENT_COLOR = '#0F172A';
 
-const App = () => {
-  const [username, setUsername] = useState('');
+const App = ({initialUsername = ''}) => {
+  const normalizedInitialUsername =
+    typeof initialUsername === 'string' ? initialUsername.trim() : '';
+  const [username, setUsername] = useState(normalizedInitialUsername);
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const {status, user, error} = useSelector(state => state.auth);
+  const lastInitialUsernameRef = useRef(normalizedInitialUsername);
 
   const isLoading = status === 'loading';
   const hasSucceeded = status === 'succeeded';
@@ -34,6 +37,15 @@ const App = () => {
       setPassword('');
     }
   }, [hasSucceeded]);
+
+  useEffect(() => {
+    const normalizedUsername =
+      typeof initialUsername === 'string' ? initialUsername.trim() : '';
+    if (normalizedUsername !== lastInitialUsernameRef.current) {
+      setUsername(normalizedUsername);
+      lastInitialUsernameRef.current = normalizedUsername;
+    }
+  }, [initialUsername]);
 
   return (
     <SafeAreaView style={styles.safeArea}>

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
@@ -16,10 +17,17 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.ui.text.input.ImeAction
 import com.pft.android.apps.androidrnpoc.ui.theme.AndroidRNPOCTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +37,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidRNPOCTheme {
                 HomeScreen(
-                    onNavigateToReactNative = {
-                        startActivity(Intent(this, ReactNativeActivity::class.java))
+                    onNavigateToReactNative = { username ->
+                        startActivity(
+                            Intent(this, ReactNativeActivity::class.java).apply {
+                                putExtra(ReactNativeActivity.EXTRA_USERNAME, username)
+                            }
+                        )
                     }
                 )
             }
@@ -39,7 +51,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun HomeScreen(onNavigateToReactNative: () -> Unit) {
+fun HomeScreen(onNavigateToReactNative: (String) -> Unit) {
+    var username by rememberSaveable { mutableStateOf("") }
+    val trimmedUsername = username.trim()
+    val isLaunchEnabled = trimmedUsername.isNotEmpty()
+
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         Column(
             modifier = Modifier
@@ -59,7 +75,20 @@ fun HomeScreen(onNavigateToReactNative: () -> Unit) {
                 style = MaterialTheme.typography.bodyMedium
             )
             Spacer(modifier = Modifier.height(32.dp))
-            Button(onClick = onNavigateToReactNative) {
+            OutlinedTextField(
+                value = username,
+                onValueChange = { username = it },
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text(text = "Username") },
+                singleLine = true,
+                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Done)
+            )
+            Spacer(modifier = Modifier.height(24.dp))
+            Button(
+                onClick = { onNavigateToReactNative(trimmedUsername) },
+                enabled = isLaunchEnabled,
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 Text(text = "Open React Native Screen")
             }
         }
