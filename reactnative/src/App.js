@@ -1,24 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   StatusBar,
   StyleSheet,
   Text,
   TextInput,
+  ActivityIndicator,
   TouchableOpacity,
   View,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {loginRequest} from './store/authSlice';
 
 const ACCENT_COLOR = '#0F172A';
 
 const App = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [submittedUsername, setSubmittedUsername] = useState(null);
+  const dispatch = useDispatch();
+  const {status, user, error} = useSelector(state => state.auth);
+
+  const isLoading = status === 'loading';
+  const hasSucceeded = status === 'succeeded';
+  const isDisabled = isLoading || username.trim().length === 0 || password.length === 0;
 
   const handleLogin = () => {
-    setSubmittedUsername(username.trim() || null);
+    const trimmedUsername = username.trim();
+    dispatch(loginRequest({username: trimmedUsername, password}));
   };
+
+  useEffect(() => {
+    if (hasSucceeded) {
+      setPassword('');
+    }
+  }, [hasSucceeded]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -55,15 +70,30 @@ const App = () => {
             />
           </View>
 
-          <TouchableOpacity style={styles.button} onPress={handleLogin} activeOpacity={0.85}>
-            <Text style={styles.buttonText}>Log in</Text>
+          <TouchableOpacity
+            style={[styles.button, isDisabled && styles.buttonDisabled]}
+            onPress={handleLogin}
+            disabled={isDisabled}
+            activeOpacity={0.85}>
+            {isLoading ? (
+              <ActivityIndicator color="#0F172A" />
+            ) : (
+              <Text style={styles.buttonText}>Log in</Text>
+            )}
           </TouchableOpacity>
 
-          {submittedUsername !== null && (
+          {error && (
+            <View style={styles.feedbackError}>
+              <Text style={styles.feedbackLabel}>Authentication failed</Text>
+              <Text style={styles.feedbackErrorText}>{error}</Text>
+            </View>
+          )}
+
+          {hasSucceeded && (
             <View style={styles.feedback}>
-              <Text style={styles.feedbackLabel}>Signed in as</Text>
+              <Text style={styles.feedbackLabel}>Authenticated as</Text>
               <Text style={styles.feedbackValue}>
-                {submittedUsername.length > 0 ? submittedUsername : 'Guest'}
+                {user?.username || user?.email || 'Successfully authenticated'}
               </Text>
             </View>
           )}
@@ -138,6 +168,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
   },
+  buttonDisabled: {
+    opacity: 0.6,
+  },
   buttonText: {
     color: '#0F172A',
     fontWeight: '700',
@@ -162,6 +195,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: '#F8FAFC',
+  },
+  feedbackError: {
+    marginTop: 14,
+    backgroundColor: 'rgba(248,113,113,0.12)',
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+  },
+  feedbackErrorText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#FCA5A5',
   },
 });
 

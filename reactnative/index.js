@@ -1,4 +1,12 @@
 import {AppRegistry} from 'react-native';
+import {Provider} from 'react-redux';
 import App from './src/App';
+import store from './src/store';
 
-AppRegistry.registerComponent('HybridScreen', () => App);
+const Root = () => (
+  <Provider store={store}>
+    <App />
+  </Provider>
+);
+
+AppRegistry.registerComponent('HybridScreen', () => Root);
