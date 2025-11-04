@@ -9,15 +9,17 @@ class ReactNativeActivity : ReactActivity() {
 
     override fun getMainComponentName(): String = REACT_COMPONENT_NAME
 
-    override fun createReactActivityDelegate(): ReactActivityDelegate {
-        val launchUsername = intent.getStringExtra(EXTRA_USERNAME)
-        return object : ReactActivityDelegate(this, mainComponentName) {
+    override fun createReactActivityDelegate(): ReactActivityDelegate =
+        object : ReactActivityDelegate(this, mainComponentName) {
             override fun getLaunchOptions(): Bundle? {
-                val normalizedUsername = launchUsername?.takeIf { it.isNotBlank() } ?: return null
+                val normalizedUsername = this@ReactNativeActivity.intent
+                    ?.getStringExtra(EXTRA_USERNAME)
+                    ?.takeIf { it.isNotBlank() }
+                    ?: return null
+
                 return bundleOf(PROP_USERNAME to normalizedUsername)
             }
         }
-    }
 
     companion object {
         private const val REACT_COMPONENT_NAME = "HybridScreen"
