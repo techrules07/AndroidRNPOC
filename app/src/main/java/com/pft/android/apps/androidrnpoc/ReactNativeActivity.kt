@@ -1,11 +1,17 @@
 package com.pft.android.apps.androidrnpoc
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.core.os.bundleOf
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 
 class ReactNativeActivity : ReactActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setResult(Activity.RESULT_CANCELED)
+    }
 
     override fun getMainComponentName(): String = REACT_COMPONENT_NAME
 

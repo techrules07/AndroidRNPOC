@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
   View,
+  NativeModules,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {loginRequest} from './store/authSlice';
@@ -46,6 +47,13 @@ const App = ({initialUsername = ''}) => {
       lastInitialUsernameRef.current = normalizedUsername;
     }
   }, [initialUsername]);
+
+  useEffect(() => {
+    const bridge = NativeModules?.HybridBridge;
+    if (bridge?.sendUsername) {
+      bridge.sendUsername(username);
+    }
+  }, [username]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
