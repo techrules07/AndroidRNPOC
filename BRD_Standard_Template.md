@@ -124,19 +124,35 @@ Capture conditions believed true (assumptions) and fixed limitations (constraint
 
 ## 6. Use Case Requirements
 
-Document each use case in sequence using the template below.
+Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary followed by detailed flows.
 
-### UC-01 - `<USE_CASE_NAME>`
+### UC-01 - App Launch and Flash Screen
 
-- **Actor(s):** `<PRIMARY_ACTOR>, <SECONDARY_ACTOR>`
-- **Trigger:** `<EVENT_THAT_STARTS_USE_CASE>`
-- **Preconditions:** `<WHAT_MUST_BE_TRUE_BEFORE_START>`
-- **Main Flow:** `<STEP_BY_STEP_HAPPY_PATH>`
-- **Alternate/Exception Flows:** `<VARIATIONS_AND_FAILURE_PATHS>`
-- **Postconditions:** `<EXPECTED_STATE_AFTER_COMPLETION>`
-- **Business Rules:** `<RULE_IDS_OR_RULE_STATEMENTS>`
-- **Data Elements:** `<INPUTS/OUTPUTS/VALIDATIONS>`
-- **Dependencies:** `<SYSTEMS/TEAMS/EXTERNAL_SERVICES>`
+| Field | Details |
+|------|---------|
+| Description | User launches the app and sees the flash/splash screen. |
+| Primary Actor | End User (for example: Promoter/Canvasser/Agent) |
+| Preconditions | App is installed on a supported device and can be launched. |
+| Postconditions | User proceeds to onboarding start or resumes from the last eligible stage. |
+
+#### Main Flow
+1. User launches the app.
+2. System displays the flash/splash screen.
+3. System performs startup checks (for example: app state, session status, required configuration).
+4. System navigates user to the Mobile Sign-up (or equivalent onboarding start) screen.
+
+#### Alternate Flows
+1. If the app was previously closed mid-journey, the system resumes at the last approved/verified stage after showing the flash/splash screen.
+2. If a valid active session exists, the system redirects the user to the appropriate landing screen based on status/role.
+
+#### Exception Flows
+1. App fails to initialize -> Display an actionable error with Retry and Exit options.
+2. Required startup service/configuration is unavailable -> Show a temporary unavailability message and allow retry.
+
+#### Validation Notes
+- Startup flow should align with defined NFR performance targets.
+- Resume behavior must restore only approved/verified stages.
+- All exception events should be logged for audit and troubleshooting.
 
 ## 7. Non-Functional Requirements
 
