@@ -20,6 +20,7 @@
 2. Keep section numbering and heading names unchanged for consistent validation across projects.
 3. Provide measurable and testable statements; avoid ambiguous wording such as "fast" or "easy."
 4. If a section is not applicable, explicitly write `Not Applicable` with a short reason.
+5. Use consistent IDs for requirements and references (for example: `UC-01`, `BR-01`, `AC-01`, `RISK-01`) to enable traceability.
 
 ---
 
@@ -34,9 +35,16 @@
 5. [Assumptions and Constraints](#5-assumptions-and-constraints)
 6. [Use Case Requirements](#6-use-case-requirements)
    - [UC-01 - Use Case Template](#uc-01---use-case-template)
-7. [Non-Functional Requirements](#7-non-functional-requirements)
-8. [Acceptance Criteria](#8-acceptance-criteria)
-9. [Sign-Off](#9-sign-off)
+7. [Business Rules and Decision Logic](#7-business-rules-and-decision-logic)
+8. [Data Requirements](#8-data-requirements)
+9. [Non-Functional Requirements](#9-non-functional-requirements)
+10. [Acceptance Criteria](#10-acceptance-criteria)
+11. [Risks and Mitigations](#11-risks-and-mitigations)
+12. [Dependencies and External Interfaces](#12-dependencies-and-external-interfaces)
+13. [Requirement Traceability Matrix](#13-requirement-traceability-matrix)
+14. [Open Questions and Decisions Log](#14-open-questions-and-decisions-log)
+15. [Sign-Off](#15-sign-off)
+16. [Appendix A - Glossary and Acronyms](#16-appendix-a---glossary-and-acronyms)
 
 ## 1. Introduction
 
@@ -84,7 +92,7 @@ Define boundaries of this BRD to prevent ambiguity and scope creep.
 ### Writing Guidelines
 - Write scope as concrete statements, not assumptions.
 - Keep in-scope and out-of-scope items mutually exclusive.
-- Any dependency outside scope should be referenced in Section 5.
+- Any dependency outside scope should be referenced in Section 12 (and Section 5 if it is also an assumption/constraint).
 
 ## 4. Stakeholders
 
@@ -134,6 +142,10 @@ Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary f
 | Primary Actor | `<PRIMARY_USER_ROLE>` |
 | Preconditions | `<CONDITIONS_THAT_MUST_BE_TRUE_BEFORE_START>` |
 | Postconditions | `<STATE_AFTER_SUCCESSFUL_COMPLETION>` |
+| Business Priority | `<MUST_HAVE | SHOULD_HAVE | COULD_HAVE>` |
+| Frequency/Volume | `<EXPECTED_USAGE_FREQUENCY_OR_TRANSACTION_VOLUME>` |
+| Related Business Rules | `<BR-01, BR-02, ...>` |
+| Related Acceptance Criteria | `<AC-01, AC-02, ...>` |
 
 #### Main Flow
 1. Actor initiates the use case from `<ENTRY_POINT>`.
@@ -157,7 +169,41 @@ Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary f
 - Verify alternate/exception paths for each critical decision point.
 - Confirm all failures are logged with sufficient audit/troubleshooting context.
 
-## 7. Non-Functional Requirements
+## 7. Business Rules and Decision Logic
+
+Capture policy/rule statements that govern behavior across one or more use cases.
+
+### Required Content (What data should be provided)
+- Rule ID (`BR-xx`) and plain-language rule statement.
+- Condition(s) under which the rule applies.
+- Action/outcome when condition is met or not met.
+- Exception/override handling, if applicable.
+- Rule owner and source (policy/document reference).
+
+### Suggested Rule Table
+
+| Rule ID | Rule Statement | Applies To (UC IDs) | Source/Owner | Notes |
+|---------|----------------|---------------------|--------------|-------|
+| BR-01 | `<RULE_TEXT>` | `<UC-01, UC-02>` | `<POLICY_OR_OWNER>` | `<NOTES>` |
+
+## 8. Data Requirements
+
+Define business data needed to execute use cases and satisfy compliance/audit needs.
+
+### Required Content (What data should be provided)
+- Data element name and description.
+- Whether it is mandatory/optional.
+- Source and destination systems (if applicable).
+- Validation rules and acceptable formats.
+- Retention, masking, and privacy classification (if applicable).
+
+### Suggested Data Dictionary Table
+
+| Data Element | Description | Required (Y/N) | Source | Validation/Format | Sensitive (Y/N) |
+|--------------|-------------|----------------|--------|-------------------|-----------------|
+| `<FIELD_NAME>` | `<MEANING>` | `<Y/N>` | `<SYSTEM/USER>` | `<RULE_OR_REGEX>` | `<Y/N>` |
+
+## 9. Non-Functional Requirements
 
 Specify measurable quality attributes.
 
@@ -168,7 +214,7 @@ Specify measurable quality attributes.
 - **Auditability/Compliance:** `<LOGGING/TRAIL/REGULATORY_NEEDS>`
 - **Usability & Accessibility:** `<UX/A11Y_REQUIREMENTS>`
 
-## 8. Acceptance Criteria
+## 10. Acceptance Criteria
 
 Define objective pass/fail checks for business sign-off.
 
@@ -176,10 +222,48 @@ Define objective pass/fail checks for business sign-off.
 - AC-02: `<CONDITION>` -> `<EXPECTED_RESULT>`
 - AC-03: `<CONDITION>` -> `<EXPECTED_RESULT>`
 
-## 9. Sign-Off
+## 11. Risks and Mitigations
+
+Document business/operational risks that may affect successful delivery or adoption.
+
+| Risk ID | Risk Description | Impact | Likelihood | Mitigation | Owner |
+|---------|------------------|--------|------------|------------|-------|
+| RISK-01 | `<RISK_TEXT>` | `<LOW/MEDIUM/HIGH>` | `<LOW/MEDIUM/HIGH>` | `<MITIGATION_PLAN>` | `<OWNER>` |
+
+## 12. Dependencies and External Interfaces
+
+List dependencies that this BRD relies on and external systems/teams involved.
+
+| Dependency ID | Type (System/Team/Vendor/Policy) | Description | Required By (Section/UC) | Status |
+|---------------|-----------------------------------|-------------|---------------------------|--------|
+| DEP-01 | `<TYPE>` | `<DEPENDENCY_TEXT>` | `<UC-01 / NFR / AC>` | `<OPEN/CLOSED>` |
+
+## 13. Requirement Traceability Matrix
+
+Ensure every objective is traceable to use cases, rules, and acceptance criteria.
+
+| Business Objective ID | Use Case ID(s) | Business Rule ID(s) | Acceptance Criteria ID(s) | Test Evidence Reference |
+|-----------------------|----------------|---------------------|----------------------------|-------------------------|
+| OBJ-01 | `<UC-01>` | `<BR-01>` | `<AC-01>` | `<TEST_CASE_OR_LINK>` |
+
+## 14. Open Questions and Decisions Log
+
+Track unresolved items and documented decisions to avoid ambiguity during implementation.
+
+| Item ID | Type (Question/Decision) | Description | Owner | Due/Decision Date | Status |
+|---------|---------------------------|-------------|-------|-------------------|--------|
+| QD-01 | `<QUESTION/DECISION>` | `<DETAILS>` | `<OWNER>` | `<DATE>` | `<OPEN/CLOSED>` |
+
+## 15. Sign-Off
 
 | Role | Name | Decision (Approve/Reject) | Date | Comments |
 |------|------|---------------------------|------|----------|
 | Business Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
 | Product Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
 | Technology Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
+
+## 16. Appendix A - Glossary and Acronyms
+
+| Term/Acronym | Definition |
+|--------------|------------|
+| `<TERM>` | `<DEFINITION>` |
