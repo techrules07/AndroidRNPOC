@@ -33,7 +33,7 @@
 4. [Stakeholders](#4-stakeholders)
 5. [Assumptions and Constraints](#5-assumptions-and-constraints)
 6. [Use Case Requirements](#6-use-case-requirements)
-   - [UC-01 - `<USE_CASE_NAME>`](#uc-01---use_case_name)
+   - [UC-01 - Use Case Template](#uc-01---use-case-template)
 7. [Non-Functional Requirements](#7-non-functional-requirements)
 8. [Acceptance Criteria](#8-acceptance-criteria)
 9. [Sign-Off](#9-sign-off)
@@ -126,33 +126,36 @@ Capture conditions believed true (assumptions) and fixed limitations (constraint
 
 Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary followed by detailed flows.
 
-### UC-01 - App Launch and Flash Screen
+### UC-01 - Use Case Template
 
 | Field | Details |
 |------|---------|
-| Description | User launches the app and sees the flash/splash screen. |
-| Primary Actor | End User (for example: Promoter/Canvasser/Agent) |
-| Preconditions | App is installed on a supported device and can be launched. |
-| Postconditions | User proceeds to onboarding start or resumes from the last eligible stage. |
+| Description | Briefly describe the business scenario and expected outcome of this use case. |
+| Primary Actor | `<PRIMARY_USER_ROLE>` |
+| Preconditions | `<CONDITIONS_THAT_MUST_BE_TRUE_BEFORE_START>` |
+| Postconditions | `<STATE_AFTER_SUCCESSFUL_COMPLETION>` |
 
 #### Main Flow
-1. User launches the app.
-2. System displays the flash/splash screen.
-3. System performs startup checks (for example: app state, session status, required configuration).
-4. System navigates user to the Mobile Sign-up (or equivalent onboarding start) screen.
+1. Actor initiates the use case from `<ENTRY_POINT>`.
+2. System validates prerequisites (for example: permissions, status, required data).
+3. Actor provides required input.
+4. System executes business rules and processes the request.
+5. System confirms the outcome and routes actor to `<NEXT_STEP>`.
 
 #### Alternate Flows
-1. If the app was previously closed mid-journey, the system resumes at the last approved/verified stage after showing the flash/splash screen.
-2. If a valid active session exists, the system redirects the user to the appropriate landing screen based on status/role.
+1. If optional data is unavailable, system uses fallback behavior defined by policy/rule.
+2. If actor has a pre-existing eligible state, system skips redundant steps and continues from the appropriate stage.
+3. If a conditional rule applies, system branches to the corresponding sub-flow.
 
 #### Exception Flows
-1. App fails to initialize -> Display an actionable error with Retry and Exit options.
-2. Required startup service/configuration is unavailable -> Show a temporary unavailability message and allow retry.
+1. Input validation fails -> System shows clear error messages and prompts correction.
+2. External dependency is unavailable -> System shows temporary failure, logs event, and offers retry/cancel.
+3. Unexpected technical error occurs -> System shows a generic error, captures trace/audit details, and safely exits or retries.
 
 #### Validation Notes
-- Startup flow should align with defined NFR performance targets.
-- Resume behavior must restore only approved/verified stages.
-- All exception events should be logged for audit and troubleshooting.
+- Ensure each step maps to a testable acceptance criterion.
+- Verify alternate/exception paths for each critical decision point.
+- Confirm all failures are logged with sufficient audit/troubleshooting context.
 
 ## 7. Non-Functional Requirements
 
