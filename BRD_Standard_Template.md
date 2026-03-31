@@ -33,18 +33,17 @@
 3. [Scope](#3-scope)
 4. [Stakeholders](#4-stakeholders)
 5. [Assumptions and Constraints](#5-assumptions-and-constraints)
-6. [Use Case Requirements](#6-use-case-requirements)
+6. [Use Case Requirements and Acceptance Criteria](#6-use-case-requirements-and-acceptance-criteria)
    - [UC-01 - Use Case Template](#uc-01---use-case-template)
 7. [Business Rules and Decision Logic](#7-business-rules-and-decision-logic)
 8. [Data Requirements](#8-data-requirements)
 9. [Non-Functional Requirements](#9-non-functional-requirements)
-10. [Acceptance Criteria](#10-acceptance-criteria)
-11. [Risks and Mitigations](#11-risks-and-mitigations)
-12. [Dependencies and External Interfaces](#12-dependencies-and-external-interfaces)
-13. [Requirement Traceability Matrix](#13-requirement-traceability-matrix)
-14. [Open Questions and Decisions Log](#14-open-questions-and-decisions-log)
-15. [Sign-Off](#15-sign-off)
-16. [Appendix A - Glossary and Acronyms](#16-appendix-a---glossary-and-acronyms)
+10. [Risks and Mitigations](#10-risks-and-mitigations)
+11. [Dependencies and External Interfaces](#11-dependencies-and-external-interfaces)
+12. [Requirement Traceability Matrix](#12-requirement-traceability-matrix)
+13. [Sign-Off](#13-sign-off)
+14. [Appendix A - Glossary and Acronyms](#14-appendix-a---glossary-and-acronyms)
+15. [Use Case Revision History](#15-use-case-revision-history)
 
 ## 1. Introduction
 
@@ -130,9 +129,9 @@ Capture conditions believed true (assumptions) and fixed limitations (constraint
 | Assumption | `<ASSUMPTION_TEXT>` | `<IMPACT_TEXT>` | `<OWNER>` |
 | Constraint | `<CONSTRAINT_TEXT>` | `<IMPACT_TEXT>` | `<OWNER>` |
 
-## 6. Use Case Requirements
+## 6. Use Case Requirements and Acceptance Criteria
 
-Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary followed by detailed flows.
+Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary, detailed flows, and linked acceptance criteria.
 
 ### UC-01 - Use Case Template
 
@@ -168,6 +167,11 @@ Document each use case in sequence (UC-01, UC-02, ...) using a tabular summary f
 - Ensure each step maps to a testable acceptance criterion.
 - Verify alternate/exception paths for each critical decision point.
 - Confirm all failures are logged with sufficient audit/troubleshooting context.
+
+#### Acceptance Criteria (for this Use Case)
+- AC-01: `<CONDITION>` -> `<EXPECTED_RESULT>`
+- AC-02: `<CONDITION>` -> `<EXPECTED_RESULT>`
+- AC-03: `<CONDITION>` -> `<EXPECTED_RESULT>`
 
 ## 7. Business Rules and Decision Logic
 
@@ -214,15 +218,7 @@ Specify measurable quality attributes.
 - **Auditability/Compliance:** `<LOGGING/TRAIL/REGULATORY_NEEDS>`
 - **Usability & Accessibility:** `<UX/A11Y_REQUIREMENTS>`
 
-## 10. Acceptance Criteria
-
-Define objective pass/fail checks for business sign-off.
-
-- AC-01: `<CONDITION>` -> `<EXPECTED_RESULT>`
-- AC-02: `<CONDITION>` -> `<EXPECTED_RESULT>`
-- AC-03: `<CONDITION>` -> `<EXPECTED_RESULT>`
-
-## 11. Risks and Mitigations
+## 10. Risks and Mitigations
 
 Document business/operational risks that may affect successful delivery or adoption.
 
@@ -230,7 +226,7 @@ Document business/operational risks that may affect successful delivery or adopt
 |---------|------------------|--------|------------|------------|-------|
 | RISK-01 | `<RISK_TEXT>` | `<LOW/MEDIUM/HIGH>` | `<LOW/MEDIUM/HIGH>` | `<MITIGATION_PLAN>` | `<OWNER>` |
 
-## 12. Dependencies and External Interfaces
+## 11. Dependencies and External Interfaces
 
 List dependencies that this BRD relies on and external systems/teams involved.
 
@@ -238,7 +234,7 @@ List dependencies that this BRD relies on and external systems/teams involved.
 |---------------|-----------------------------------|-------------|---------------------------|--------|
 | DEP-01 | `<TYPE>` | `<DEPENDENCY_TEXT>` | `<UC-01 / NFR / AC>` | `<OPEN/CLOSED>` |
 
-## 13. Requirement Traceability Matrix
+## 12. Requirement Traceability Matrix
 
 Ensure every objective is traceable to use cases, rules, and acceptance criteria.
 
@@ -246,24 +242,24 @@ Ensure every objective is traceable to use cases, rules, and acceptance criteria
 |-----------------------|----------------|---------------------|----------------------------|-------------------------|
 | OBJ-01 | `<UC-01>` | `<BR-01>` | `<AC-01>` | `<TEST_CASE_OR_LINK>` |
 
-## 14. Open Questions and Decisions Log
+## 13. Sign-Off
 
-Track unresolved items and documented decisions to avoid ambiguity during implementation.
+| Stakeholder | Name/Team | Decision (Approve/Reject) | Date | Comments |
+|-------------|-----------|---------------------------|------|----------|
+| `<BUSINESS_STAKEHOLDER>` | `<NAME/TEAM>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
+| `<PRODUCT_STAKEHOLDER>` | `<NAME/TEAM>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
+| `<TECHNOLOGY_STAKEHOLDER>` | `<NAME/TEAM>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
 
-| Item ID | Type (Question/Decision) | Description | Owner | Due/Decision Date | Status |
-|---------|---------------------------|-------------|-------|-------------------|--------|
-| QD-01 | `<QUESTION/DECISION>` | `<DETAILS>` | `<OWNER>` | `<DATE>` | `<OPEN/CLOSED>` |
-
-## 15. Sign-Off
-
-| Role | Name | Decision (Approve/Reject) | Date | Comments |
-|------|------|---------------------------|------|----------|
-| Business Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
-| Product Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
-| Technology Owner | `<NAME>` | `<DECISION>` | `<DATE>` | `<COMMENTS>` |
-
-## 16. Appendix A - Glossary and Acronyms
+## 14. Appendix A - Glossary and Acronyms
 
 | Term/Acronym | Definition |
 |--------------|------------|
 | `<TERM>` | `<DEFINITION>` |
+
+## 15. Use Case Revision History
+
+Track versioned updates to use cases after baseline approval so downstream teams can assess impact quickly.
+
+| Entry ID | UC ID | Version | Date (DD-MMM-YY) | Changed By | Reviewed By | Change Summary | Impacted Sections/Artifacts |
+|----------|-------|---------|------------------|------------|-------------|----------------|-----------------------------|
+| UCRH-01 | `<UC-01>` | `<1.1>` | `<DATE>` | `<NAME/TEAM>` | `<NAME/TEAM>` | `<WHAT_CHANGED_AND_WHY>` | `<BR-IDs/AC-IDs/NFR/Test Cases>` |
